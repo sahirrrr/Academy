@@ -1,20 +1,12 @@
 package com.dicoding.academies.ui.reader
 
-import com.dicoding.academies.data.AcademyRepository
 import com.dicoding.academies.data.source.local.entity.ContentEntity
-import com.dicoding.academies.data.source.local.entity.ModuleEntity
 import com.dicoding.academies.utils.DataDummy
 import org.junit.Before
 import org.junit.Test
 
 import org.junit.Assert.*
-import org.junit.runner.RunWith
-import org.mockito.Mock
-import org.mockito.Mockito.`when`
-import org.mockito.Mockito.verify
-import org.mockito.junit.MockitoJUnitRunner
 
-@RunWith(MockitoJUnitRunner::class)
 class CourseReaderViewModelTest {
 
     private lateinit var viewModel: CourseReaderViewModel
@@ -24,12 +16,9 @@ class CourseReaderViewModelTest {
     private val dummyModules = DataDummy.generateDummyModules(courseId)
     private val moduleId = dummyModules[0].moduleId
 
-    @Mock
-    private lateinit var academyRepository: AcademyRepository
-
     @Before
     fun setUp() {
-        viewModel = CourseReaderViewModel(academyRepository)
+        viewModel = CourseReaderViewModel()
         viewModel.setSelectedCourse(courseId)
         viewModel.setSelectedModule(moduleId)
 
@@ -39,18 +28,14 @@ class CourseReaderViewModelTest {
 
     @Test
     fun getModules() {
-        `when`(academyRepository.getAllModulesByCourse(courseId)).thenReturn(dummyModules)
         val moduleEntities = viewModel.getModules()
-        verify(academyRepository).getAllModulesByCourse(courseId)
         assertNotNull(moduleEntities)
         assertEquals(7, moduleEntities.size.toLong())
     }
 
     @Test
     fun getSelectedModule() {
-        `when`(academyRepository.getContent(courseId, moduleId)).thenReturn(dummyModules[0])
         val moduleEntity = viewModel.getSelectedModule()
-        verify(academyRepository).getContent(courseId, moduleId)
         assertNotNull(moduleEntity)
 
         val contentEntity = moduleEntity.contentEntity

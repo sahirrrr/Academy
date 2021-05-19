@@ -10,4 +10,4 @@ data class CourseResponse(
     var description: String,
     var date: String,
     var imagePath: String
-): Parcelable
+):Parcelable

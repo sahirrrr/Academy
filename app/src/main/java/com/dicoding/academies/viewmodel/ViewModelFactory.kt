@@ -17,11 +17,9 @@ class ViewModelFactory private constructor(private val mAcademyRepository: Acade
         private var instance: ViewModelFactory? = null
 
         fun getInstance(context: Context): ViewModelFactory =
-                instance ?: synchronized(this) {
-                    ViewModelFactory(Injection.provideRepository(context)).apply {
-                        instance = this
-                    }
-                }
+            instance ?: synchronized(this) {
+                ViewModelFactory(Injection.provideRepository(context)).apply { instance = this }
+            }
     }
 
     @Suppress("UNCHECKED_CAST")

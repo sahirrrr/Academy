@@ -8,5 +8,5 @@ data class ModuleResponse(
     var moduleId: String,
     var courseId: String,
     var title: String,
-    var position: Int,
+    var position: Int
 ) : Parcelable

@@ -1,5 +1,8 @@
 package com.dicoding.academies.data.source.local.entity
 
-data class ContentEntity (
+import androidx.room.ColumnInfo
+
+data class ContentEntity(
+        @ColumnInfo(name = "content")
         var content: String?
 )
